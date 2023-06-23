@@ -1,0 +1,67 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">AnimeList</string>
+    <string name="web_client_id" translatable="false">169076413875-550tgks6t1dmfp4r73ku1bm2pm2h8mu6.apps.googleusercontent.com</string>
+    <string name="password">Password</string>
+    <string name="sign_in_error">Email Error</string>
+    <string name="sign_in">Sign in</string>
+    <string name="sign_in_google">Login with Google</string>
+    <string name="password_error">Password error</string>
+    <string name="full_name_error">Full Name error</string>
+    <string name="email_error">Email error</string>
+    <string name="sign_in_text">Sign in to continue</string>
+    <string name="sign_in_title">Welcome to App</string>
+    <string name="sign_up_text">Create an new account</string>
+    <string name="sign_up_title">Let’s Get Started</string>
+    <string name="sign_up">Sign up</string>
+    <string name="search_hint">Search Product</string>
+    <string name="recommended_product">Recommended \nProduct</string>
+    <string name="home">Home</string>
+
+    <string name="search">Search</string>
+    <string name="calendar">Calendar</string>
+    <string name="account">Account</string>
+    <string name="mega_sale">Mega Sale</string>
+    <string name="see_more">See More</string>
+    <string name="flash_sale">Flash Sale</string>
+    <string name="categories">Categories</string>
+    <string name="more_category">More Category</string>
+    <string name="top_hits_anime">Top Hits Anime</string>
+    <string name="see_all">See all</string>
+    <string name="new_episodes_released" tools:ignore="ExtraTranslation">New Episodes Released</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="recommendations">Recommendations</string>
+
+    <string name="one_piece_link">https://www.google.com/url?sa=i&amp;url=https%3A%2F%2Fwww.kobo.com%2Ftr%2Ftr%2Febook%2Fone-piece-vol-100&amp;psig=AOvVaw053WSxeWDiI3V6iHitq61A&amp;ust=1678416329517000&amp;source=images&amp;cd=vfe&amp;ved=0CA0QjRxqFwoTCLDH-Zvqzf0CFQAAAAAdAAAAABAD</string>
+    <string name="season_now">Season Now</string>
+    <string name="anime">Anime</string>
+    <string name="send">Send</string>
+    <string name="save">Web</string>
+    <string name="star">Star</string>
+    <string name="play">Play</string>
+    <string name="download">Download</string>
+    <string name="genre">Genre</string>
+    <string name="characters">Characters</string>
+    <string name="more_like_this">More Like This</string>
+    <string name="days_ago">%d days ago</string>
+    <string name="hours_ago">%d hours ago</string>
+    <string name="minutes_ago">%d minutes ago</string>
+    <string name="detail">Detail</string>
+    <string name="retry">Retry</string>
+
+    <string-array name="anime_detail_tab">
+        <item>More Like This</item>
+        <item>Comments (%d)</item>
+    </string-array>
+    <string-array name="character_role">
+        <item>Main</item>
+        <item>Supporting</item>
+    </string-array>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="current_time">Current Time -  %s</string>
+    <string name="episodes">Episodes %d</string>
+    <string name="release_calendar">Release Calendar</string>
+    <string name="episode_error">API section cannot be viewed because it did not provide a trailer.</string>
+</resources>

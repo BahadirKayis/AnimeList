@@ -1,0 +1,90 @@
+package com.bahadir.animelist.presentation.home
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.bahadir.animelist.common.Resource
+import com.bahadir.animelist.common.extensions.collectIn
+import com.bahadir.animelist.delegation.viewmodel.VMDelegation
+import com.bahadir.animelist.delegation.viewmodel.VMDelegationImpl
+import com.bahadir.animelist.domain.usecase.home.CharacterAnimeSeasonUseCase
+import com.bahadir.animelist.domain.usecase.home.EpisodeRandomRecommendationUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import javax.inject.Inject
+
+@HiltViewModel
+class HomeVM @Inject constructor(
+    private val getCharacterAnimSeason: CharacterAnimeSeasonUseCase,
+    private val getSecondData: EpisodeRandomRecommendationUseCase
+) : ViewModel(),
+    VMDelegation<HomeUIEffect, HomeUIEvent, HomeUIState> by VMDelegationImpl(HomeUIState(true)) {
+    init {
+        viewModel(this)
+        event.collectIn(viewModelScope) { event ->
+            when (event) {
+                is HomeUIEvent.ActionAnimeDetail -> setEffect(HomeUIEffect.ActionAnimeDetail(event.id))
+
+                is HomeUIEvent.ActionCharacterDetail ->
+                    setEffect(HomeUIEffect.ActionCharacterDetail(event.characters))
+
+                is HomeUIEvent.ActionTopAnime -> setEffect(HomeUIEffect.ActionTopAnime)
+
+                is HomeUIEvent.ActionSeasonNow -> setEffect(HomeUIEffect.ActionSeasonNow)
+
+                is HomeUIEvent.ActionRecommendation -> setEffect(HomeUIEffect.ActionRecommendation)
+                is HomeUIEvent.NewEpisode -> setEffect(HomeUIEffect.SnackBarMessage(event.message))
+            }
+        }
+        getData()
+    }
+
+    private fun getData() {
+        getCharacterAnimSeason.invoke().onEach { result ->
+            when (result) {
+                is Resource.Success -> {
+                    setState(
+                        getCurrentState().copy(
+                            isLoading = true,
+                            characters = result.data.first,
+                            anime = result.data.second,
+                            season = result.data.third
+                        )
+                    )
+                    delay(DELAY)//Rate limit prevention with delay.
+                    getSecondData()
+                }
+
+                is Resource.Error -> {
+                    setEffect(HomeUIEffect.SnackBarMessage(result.message))
+                }
+            }
+        }.launchIn(viewModelScope)
+    }
+
+    private fun getSecondData() {
+        getSecondData.invoke().onEach { result ->
+            when (result) {
+                is Resource.Success -> {
+                    setState(
+                        getCurrentState().copy(
+                            isLoading = false,
+                            episodes = result.data.first,
+                            recommendations = result.data.second
+                        )
+                    )
+                }
+
+                is Resource.Error -> {
+                    setEffect(HomeUIEffect.SnackBarMessage(result.message))
+                }
+            }
+        }.launchIn(viewModelScope)
+
+    }
+
+    companion object {
+        private const val DELAY = 2000L
+    }
+}

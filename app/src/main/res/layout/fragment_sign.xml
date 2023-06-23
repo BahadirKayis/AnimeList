@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp"
+    android:id="@+id/cons"
+    tools:context=".presentation.sign.SignFragment">
+
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/app_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.05"
+        tools:ignore="ContentDescription,ImageContrastCheck" />
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:text="@string/sign_in_title"
+        android:textAlignment="center"
+        android:textColor="@color/neutral_dark"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/img" />
+
+    <TextView
+        android:id="@+id/text2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:text="@string/sign_in_text"
+        android:textColor="@color/neutral_gray"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="@id/text"
+        app:layout_constraintStart_toStartOf="@id/text"
+        app:layout_constraintTop_toBottomOf="@id/text"
+        tools:ignore="TextContrastCheck" />
+
+    <com.bahadir.animelist.presentation.base.customcomponentview.CustomTextInputLayout
+        android:id="@+id/et_full_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:visibility="gone"
+        app:cviE_hint="Full Name"
+        app:cviL_radius="@dimen/_16sdp"
+        app:cviE_inputType="text"
+        app:cviL_startIcon="@drawable/ic_user"
+        app:cviL_textErrorMessage="@string/full_name_error"
+        app:layout_constraintEnd_toEndOf="@id/text"
+        app:layout_constraintStart_toStartOf="@id/text"
+        app:layout_constraintTop_toBottomOf="@id/text2" />
+
+    <com.bahadir.animelist.presentation.base.customcomponentview.CustomTextInputLayout
+        android:id="@+id/et_password"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:cviE_hint="@string/password"
+        app:cviL_radius="@dimen/_16sdp"
+        app:cviE_inputType="password"
+        app:cviL_passwordToggle="true"
+        app:cviL_startIcon="@drawable/ic_password"
+        app:cviL_textErrorMessage="@string/password_error"
+        app:layout_constraintEnd_toEndOf="@id/text"
+        app:layout_constraintStart_toStartOf="@id/text"
+        app:layout_constraintTop_toBottomOf="@id/et_email" />
+
+    <com.bahadir.animelist.presentation.base.customcomponentview.CustomTextInputLayout
+        android:id="@+id/et_password_again"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:visibility="gone"
+        app:cviE_hint="Password Again"
+        app:cviL_radius="@dimen/_16sdp"
+        app:cviE_inputType="password"
+        app:cviL_passwordToggle="true"
+        app:cviL_startIcon="@drawable/ic_password"
+        app:cviL_textErrorMessage="@string/password_error"
+        app:layout_constraintEnd_toEndOf="@id/text"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="@id/text"
+        app:layout_constraintTop_toBottomOf="@id/et_password" />
+
+    <com.bahadir.animelist.presentation.base.customcomponentview.CustomTextInputLayout
+        android:id="@+id/et_email"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:cviE_hint="Your Email"
+        app:cviE_inputType="email"
+        app:cviL_radius="@dimen/_16sdp"
+        app:cviL_startIcon="@drawable/ic_email"
+        app:cviL_textErrorMessage="@string/email_error"
+        app:layout_constraintEnd_toEndOf="@id/text"
+        app:layout_constraintStart_toStartOf="@id/text"
+        app:layout_constraintTop_toBottomOf="@id/et_full_name" />
+
+    <Button
+        android:id="@+id/btn_sign"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/green_dark_pastel"
+        android:fontFamily="@font/poppins_bold"
+        android:text="@string/sign_in"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="@id/text"
+        app:layout_constraintStart_toStartOf="@id/text"
+        app:layout_constraintTop_toBottomOf="@id/et_password_again"
+        tools:ignore="TextContrastCheck" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_google"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/white"
+        android:drawableStart="@drawable/ic_google"
+        android:fontFamily="@font/poppins_bold"
+        android:text="@string/sign_in_google"
+        android:textAllCaps="false"
+        android:textColor="@color/neutral_gray"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="@id/text"
+        app:layout_constraintStart_toStartOf="@id/text"
+        app:layout_constraintTop_toBottomOf="@id/btn_sign"
+        tools:ignore="TextContrastCheck"
+        tools:layout_editor_absoluteX="20dp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_state_sign_in"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/green_dark_pastel"
+        android:text="@string/sign_in"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_state_register"
+        app:layout_constraintStart_toStartOf="@id/text"
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="TextContrastCheck" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_state_register"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/neutral_light"
+        android:text="@string/sign_up"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/text"
+        app:layout_constraintStart_toEndOf="@id/btn_state_sign_in"
+        app:layout_constraintTop_toBottomOf="@id/btn_google"
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="TextContrastCheck" />
+
+    <ProgressBar
+        android:id="@+id/progress"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@android:drawable/screen_background_light"
+        android:clickable="true"
+        android:elevation="2dp"
+        android:focusable="true"
+        android:indeterminateTint="@color/green_dark_pastel"
+        android:max="90"
+        android:padding="150dp"
+        android:translationZ="90dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

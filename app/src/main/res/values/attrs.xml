@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomTextInputLayout">
+        <attr name="cviL_boxStrokeColor" format="color" />
+        <attr name="cviL_startIcon" format="reference" />
+        <attr name="cviL_passwordToggle" format="boolean" />
+        <attr name="cviL_startIconTint" format="color" />
+        <attr name="cviE_hint" format="string" />
+        <attr name="cviL_radius" format="dimension" />
+        <attr name="cviL_textErrorMessage" format="string" />
+        <attr name="cviE_inputType" format="enum">
+            <enum name="text" value="0" />
+            <enum name="search" value="1" />
+            <enum name="password" value="2" />
+            <enum name="email" value="3" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="CustomToolbar">
+        <attr name="cvT_startIcon" format="boolean" />
+        <attr name="cvT_title" format="string" />
+        <attr name="cvT_endLineView" format="boolean" />
+        <attr name="cvT_starIconChange" format="reference" />
+        <attr name="cvT_title_gravity" format="enum">
+            <enum name="start" value="0" />
+            <enum name="center" value="1" />
+            <enum name="end" value="2" />
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="FullscreenAttrs">
+        <attr name="fullscreenBackgroundColor" format="color" />
+        <attr name="fullscreenTextColor" format="color" />
+    </declare-styleable>
+
+</resources>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.bahadir.animelist.presentation.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/actionHomeToCharacterDetail"
+            app:destination="@id/characterDetailFragment" />
+        <action
+            android:id="@+id/actionHomeToAnimeDetail"
+            app:destination="@id/animeDetailFragment" />
+        <action
+            android:id="@+id/action_see_all_fragment"
+            app:destination="@id/seeAllAnimeFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/characterDetailFragment"
+        android:name="com.bahadir.animelist.presentation.characterdetail.CharacterDetailFragment"
+        android:label="fragment_character_detail"
+        tools:layout="@layout/fragment_character_detail">
+        <argument
+            android:name="character"
+            app:argType="com.bahadir.animelist.domain.model.home.CharactersUI" />
+        <action
+            android:id="@+id/action_character_to_anime_detail"
+            app:destination="@id/animeDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/animeDetailFragment"
+        android:name="com.bahadir.animelist.presentation.animedetail.AnimeDetailFragment"
+        android:label="fragment_anime_detail"
+        tools:layout="@layout/fragment_anime_detail">
+        <argument
+            android:name="id"
+            app:argType="integer"
+            app:nullable="false" />
+        <action
+            android:id="@+id/action_animeDetailToVideoPlayer"
+            app:destination="@id/videoPlayerFragment" />
+        <action
+            android:id="@+id/action_CharacterDetail"
+            app:destination="@id/characterDetailFragment" />
+        <action
+            android:id="@+id/action_animeDetailFragment_self"
+            app:destination="@id/animeDetailFragment"
+            app:popUpTo="@id/animeDetailFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/videoPlayerFragment"
+        android:name="com.bahadir.animelist.presentation.video.VideoPlayerFragment"
+        android:label="fragment_video_player"
+        tools:layout="@layout/fragment_video_player">
+        <argument
+            android:name="videoId"
+            app:argType="string"
+            app:nullable="false" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/seeAllAnimeFragment"
+        android:name="com.bahadir.animelist.presentation.seeall.SeeAllAnimeFragment"
+        android:label="fragment_top_hits_anime"
+        tools:layout="@layout/fragment_see_all_anime">
+        <action
+            android:id="@+id/action_animeDetailFragment"
+            app:destination="@id/animeDetailFragment" />
+        <action
+            android:id="@+id/action_videoPlayer"
+            app:destination="@id/videoPlayerFragment" />
+        <argument
+            android:name="anime"
+            app:argType="com.bahadir.animelist.common.SeeAllAnime" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.bahadir.animelist.presentation.search.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_search_to_detail"
+            app:destination="@id/animeDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/scheduleFragment"
+        android:name="com.bahadir.animelist.presentation.schedule.ScheduleFragment"
+        android:label="fragment_schedule"
+        tools:layout="@layout/fragment_schedule">
+        <action
+            android:id="@+id/action_scheduleFragment_to_videoPlayerFragment"
+            app:destination="@id/videoPlayerFragment" />
+    </fragment>
+</navigation>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/login_nav"
+    app:startDestination="@id/signFragment">
+
+    <fragment
+        android:id="@+id/signFragment"
+        android:name="com.bahadir.animelist.presentation.sign.SignFragment"
+        android:label="fragment_sign"
+        tools:layout="@layout/fragment_sign">
+        <action
+            android:id="@+id/action_nav_graph"
+            app:destination="@id/nav_graph"
+            app:popUpTo="@id/login_nav"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <include app:graph="@navigation/nav_graph" />
+</navigation>

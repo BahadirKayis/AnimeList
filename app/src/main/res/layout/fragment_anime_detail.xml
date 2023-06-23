@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.animedetail.AnimeDetailFragment">
+
+
+    <com.bahadir.animelist.presentation.base.customcomponentview.CustomToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:elevation="2dp"
+        app:cvT_endLineView="false"
+        app:cvT_starIconChange="@drawable/ic_back_white"
+        app:cvT_startIcon="true"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.afdhal_fa.imageslider.ImageSlider
+        android:id="@+id/imgSlider"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        app:iss_auto_cycle="true"
+        app:iss_image_scaleType="fitXY"
+        app:iss_period="3000"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_anime_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/urbanist_bold"
+        android:maxLines="1"
+        android:textColor="@color/black_raisin"
+        android:textSize="28sp"
+        app:layout_constraintEnd_toStartOf="@id/img_web"
+        app:layout_constraintStart_toStartOf="@id/toolbar"
+        app:layout_constraintTop_toBottomOf="@id/imgSlider"
+        tools:text="One Piece" />
+
+    <ImageView
+        android:id="@+id/img_web"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="@color/black"
+        android:contentDescription="@string/save"
+        android:src="@drawable/ic_web"
+        app:layout_constraintBottom_toBottomOf="@id/text_anime_name"
+        app:layout_constraintEnd_toStartOf="@id/img_send"
+        app:layout_constraintTop_toTopOf="@id/text_anime_name" />
+
+    <ImageView
+        android:id="@+id/img_send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:contentDescription="@string/send"
+        android:src="@drawable/ic_send"
+        app:layout_constraintBottom_toBottomOf="@id/text_anime_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/text_anime_name" />
+
+    <TextView
+        android:id="@+id/text_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/border_roundend"
+        android:fontFamily="@font/urbanist_bold"
+        android:padding="8dp"
+        android:paddingStart="14dp"
+        android:paddingEnd="14dp"
+        android:textColor="@color/green_dark_pastel"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@id/text_year"
+        app:layout_constraintTop_toBottomOf="@id/text_anime_name"
+        tools:text="Japan" />
+
+    <TextView
+        android:id="@+id/text_year"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/urbanist_bold"
+        android:padding="4dp"
+        android:textColor="@color/black_raisin"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/text_type"
+        app:layout_constraintStart_toEndOf="@id/_arrow_"
+        app:layout_constraintTop_toTopOf="@id/text_type"
+        tools:text="1999" />
+
+    <ImageView
+        android:id="@+id/_star_"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/star"
+        android:src="@drawable/ic_star"
+        app:layout_constraintBottom_toBottomOf="@id/text_type"
+        app:layout_constraintStart_toStartOf="@id/toolbar"
+        app:layout_constraintTop_toTopOf="@id/text_type" />
+
+    <TextView
+        android:id="@+id/text_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textColor="@color/green_dark_pastel"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/text_type"
+        app:layout_constraintStart_toEndOf="@id/_star_"
+        app:layout_constraintTop_toTopOf="@id/text_type"
+        tools:text="9.8" />
+
+    <ImageView
+        android:id="@+id/_arrow_"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_arrow_small"
+        app:layout_constraintBottom_toBottomOf="@id/text_type"
+        app:layout_constraintStart_toEndOf="@id/text_score"
+        app:layout_constraintTop_toTopOf="@id/text_type" />
+
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_type">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white">
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/collapsingToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="@color/white"
+                app:contentScrim="@color/white"
+                app:layout_scrollFlags="scroll">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/app_background">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_play"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/green_dark_pastel"
+                        android:padding="8dp"
+                        android:text="@string/play"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        app:cornerRadius="@dimen/_16sdp"
+                        app:icon="@drawable/ic_play"
+                        app:iconGravity="textStart"
+                        app:layout_constraintEnd_toStartOf="@+id/btn_download"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_download"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginEnd="24dp"
+                        android:backgroundTint="@color/white"
+                        android:padding="8dp"
+                        android:text="@string/download"
+                        android:textAllCaps="false"
+                        android:textColor="@color/green_dark_pastel"
+                        android:textSize="16sp"
+                        app:cornerRadius="@dimen/_16sdp"
+                        app:icon="@drawable/ic_download_bold"
+                        app:iconGravity="textStart"
+                        app:iconTint="@color/green_dark_pastel"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/btn_play"
+                        app:strokeColor="@color/green_dark_pastel"
+                        app:strokeWidth="1dp"
+                        tools:ignore="MissingConstraints" />
+
+                    <TextView
+                        android:id="@+id/text_genre"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/urbanist_medium"
+                        android:lines="1"
+                        android:textColor="@color/black_raisin"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="@id/btn_download"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/btn_play"
+                        tools:text="Genre:Action,Martial Arts,Adventure,Dark Fantasy,Thriller.." />
+
+                    <io.github.glailton.expandabletextview.ExpandableTextView
+                        android:id="@+id/text_synopsis"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/urbanist_medium"
+                        android:textColor="@color/gray_granite"
+                        android:textSize="16sp"
+                        app:animDuration="2000"
+                        app:collapsedLines="3"
+                        app:ellipsizeTextColor="@color/green_dark_pastel"
+                        app:isExpanded="false"
+                        app:layout_constraintEnd_toEndOf="@id/btn_download"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/text_genre"
+                        app:readLessText="Less"
+                        app:readMoreText="View More"
+                        app:textMode="line"
+                        tools:text="text_synopsis" />
+
+                    <com.skydoves.powerspinner.PowerSpinnerView
+                        android:id="@+id/spinner_role"
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:textColor="@color/green_dark_pastel"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="@id/btn_download"
+                        app:layout_constraintTop_toBottomOf="@id/text_synopsis"
+                        app:spinner_arrow_animate="true"
+                        app:spinner_arrow_animate_duration="250"
+                        app:spinner_arrow_drawable="@drawable/ic_arrow_down"
+                        app:spinner_item_array="@array/character_role"
+                        app:spinner_popup_animation="bounce"
+                        app:spinner_popup_background="@color/white"
+                        app:spinner_popup_elevation="16dp"
+                        app:spinner_popup_height="75dp"
+                        app:spinner_popup_padding="8dp"
+                        tools:text="Main" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/urbanist_bold"
+                        android:text="@string/characters"
+                        android:textColor="@color/black_raisin"
+                        android:textSize="18sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/spinner_role" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_character"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:backgroundTint="@color/app_background"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layout_constraintTop_toBottomOf="@id/spinner_role" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                app:tabIndicatorColor="@color/green_dark_pastel"
+                app:tabSelectedTextColor="@color/green_dark_pastel"
+                app:tabTextColor="@color/gray_granite">
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/more_like_this" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/more_like_this" />
+            </com.google.android.material.tabs.TabLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="12dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tab_layout">
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <ProgressBar
+        android:id="@+id/progress"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@android:drawable/screen_background_light"
+        android:clickable="true"
+        android:elevation="2dp"
+        android:focusable="true"
+        android:indeterminateTint="@color/green_dark_pastel"
+        android:max="90"
+        android:padding="150dp"
+        android:translationZ="90dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

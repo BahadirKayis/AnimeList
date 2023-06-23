@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/_cardView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="100dp"
+        app:cardElevation="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/img_userProfile"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@null"
+            android:scaleType="centerCrop"
+            tools:srcCompat="@tools:sample/avatars" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/text_userName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:fontFamily="@font/urbanist_bold"
+        android:maxLines="1"
+        android:textColor="@color/black_input_text"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@id/_cardView"
+        app:layout_constraintStart_toEndOf="@id/_cardView"
+        app:layout_constraintTop_toTopOf="@id/_cardView"
+        tools:text="Willard Purnell" />
+
+    <io.github.glailton.expandabletextview.ExpandableTextView
+        android:id="@+id/text_comment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/urbanist_medium"
+        android:textColor="@color/black_raisin"
+        android:textSize="16sp"
+        app:animDuration="2000"
+        app:collapsedLines="3"
+        app:ellipsizeTextColor="@color/green_dark_pastel"
+        app:isExpanded="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/_cardView"
+        app:readLessText="Less"
+        app:readMoreText="View More"
+        app:textMode="line"
+        tools:text="text_synopsis" />
+
+    <ImageView
+        android:id="@+id/_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_favorite_full"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_comment" />
+
+    <TextView
+        android:id="@+id/text_love"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/urbanist_medium"
+        android:textColor="@color/black_raisin"
+        app:layout_constraintBottom_toBottomOf="@+id/_img"
+        app:layout_constraintStart_toEndOf="@id/_img"
+        app:layout_constraintTop_toTopOf="@id/_img"
+        tools:text="99999" />
+
+    <TextView
+        android:id="@+id/text_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:textColor="@color/gray_granite"
+        app:layout_constraintBottom_toBottomOf="@+id/_img"
+        app:layout_constraintStart_toEndOf="@id/text_love"
+        app:layout_constraintTop_toTopOf="@id/_img"
+        tools:text="3 days ago" />
+</androidx.constraintlayout.widget.ConstraintLayout>
