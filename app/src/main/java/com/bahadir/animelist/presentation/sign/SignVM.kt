@@ -10,6 +10,8 @@ import com.bahadir.animelist.domain.usecase.sign.GoogleSignUpUseCase
 import com.bahadir.animelist.domain.usecase.sign.SignInUseCase
 import com.bahadir.animelist.domain.usecase.sign.SignUpUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
@@ -19,6 +21,7 @@ class SignVM @Inject constructor(
     private val signUpUseCase: SignUpUseCase,
     private val googleSignUpUseCase: GoogleSignUpUseCase,
     private val signInUseCase: SignInUseCase,
+    private val dispatcherIO: CoroutineDispatcher,
 ) : ViewModel(),
     VMDelegation<SignUIEffect, SignUIEvent, SignUIState> by VMDelegationImpl(SignUIState()) {
     private var signState = SignState.SIGN_IN
@@ -69,7 +72,7 @@ class SignVM @Inject constructor(
 
     private fun signUpEP(email: String, password: String, fullName: String) {
         if (email.isNotEmpty() && password.isNotEmpty() && fullName.isNotEmpty()) {
-            signUpUseCase.invoke(email, password).onEach { result ->
+            signUpUseCase.invoke(email, password).flowOn(dispatcherIO).onEach { result ->
                 when (result) {
                     is Resource.Success -> {
                         result.data.user?.let { _ ->
@@ -91,7 +94,7 @@ class SignVM @Inject constructor(
     }
 
     private fun signGoogle() {
-        googleSignUpUseCase.invoke().onEach {
+        googleSignUpUseCase.invoke().flowOn(dispatcherIO).onEach {
             when (it) {
                 is Resource.Success -> {
                     setEffect(SignUIEffect.GoToGoogleAccountScreen(it.data))
@@ -106,7 +109,7 @@ class SignVM @Inject constructor(
     }
 
     fun firebaseAuthWithGoogle(idToken: String) {
-        googleSignUpUseCase.invoke(idToken).onEach {
+        googleSignUpUseCase.invoke(idToken).flowOn(dispatcherIO).onEach {
             when (it) {
                 is Resource.Success -> {
                     it.data.user?.let { _ ->
@@ -128,7 +131,7 @@ class SignVM @Inject constructor(
 
     private fun signIn(email: String, password: String) {
         if (email.isNotEmpty() && password.isNotEmpty()) {
-            signInUseCase.invoke(email, password).onEach {
+            signInUseCase.invoke(email, password).flowOn(dispatcherIO).onEach {
                 when (it) {
                     is Resource.Success -> {
                         it.data.user?.let { _ ->

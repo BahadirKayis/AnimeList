@@ -12,7 +12,6 @@ class MainVM @Inject constructor(private val isCurrentUserExistUseCase: IsCurren
     var isLogged = true
 
     fun isCurrentUserExistUseCase(): Flow<Boolean> {
-
         return isCurrentUserExistUseCase.invoke()
     }
 

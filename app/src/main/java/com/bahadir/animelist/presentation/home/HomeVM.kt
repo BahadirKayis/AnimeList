@@ -9,7 +9,9 @@ import com.bahadir.animelist.delegation.viewmodel.VMDelegationImpl
 import com.bahadir.animelist.domain.usecase.home.CharacterAnimeSeasonUseCase
 import com.bahadir.animelist.domain.usecase.home.EpisodeRandomRecommendationUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
@@ -17,6 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeVM @Inject constructor(
     private val getCharacterAnimSeason: CharacterAnimeSeasonUseCase,
+    private val dispatcherIO: CoroutineDispatcher,
     private val getSecondData: EpisodeRandomRecommendationUseCase
 ) : ViewModel(),
     VMDelegation<HomeUIEffect, HomeUIEvent, HomeUIState> by VMDelegationImpl(HomeUIState(true)) {
@@ -40,8 +43,10 @@ class HomeVM @Inject constructor(
         getData()
     }
 
+    //flowOn(dispatcherIO) IO işlemlerini ayrı bir thread üzerinde çalıştırırken,
+    //launchIn(viewModelScope) ise Flow'u ViewModel'in kapsamında yönetir
     private fun getData() {
-        getCharacterAnimSeason.invoke().onEach { result ->
+        getCharacterAnimSeason.invoke().flowOn(dispatcherIO).onEach { result ->
             when (result) {
                 is Resource.Success -> {
                     setState(
@@ -64,7 +69,7 @@ class HomeVM @Inject constructor(
     }
 
     private fun getSecondData() {
-        getSecondData.invoke().onEach { result ->
+        getSecondData.invoke().flowOn(dispatcherIO).onEach { result ->
             when (result) {
                 is Resource.Success -> {
                     setState(

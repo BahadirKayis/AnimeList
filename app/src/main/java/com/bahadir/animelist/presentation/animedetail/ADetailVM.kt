@@ -9,7 +9,9 @@ import com.bahadir.animelist.delegation.viewmodel.VMDelegation
 import com.bahadir.animelist.delegation.viewmodel.VMDelegationImpl
 import com.bahadir.animelist.domain.usecase.animedetail.AnimeDetailUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -19,6 +21,7 @@ import javax.inject.Inject
 class ADetailVM @Inject constructor(
     savedStateHandle: SavedStateHandle,
     private val useCase: AnimeDetailUseCase,
+  private val dispatcherIO: CoroutineDispatcher
 ) : ViewModel(), VMDelegation<ADetailUIEffect, ADetailUIEvent, ADetailUIState>
 by VMDelegationImpl(ADetailUIState(true)) {
 
@@ -78,7 +81,7 @@ by VMDelegationImpl(ADetailUIState(true)) {
     }
 
     private fun getAnimeDetail(id: Int) {
-        useCase.getAnimePhoto(id).onEach {
+        useCase.getAnimePhoto(id).flowOn(dispatcherIO).onEach {
             when (it) {
                 is Resource.Success -> {
                     val data = it.data
@@ -99,7 +102,7 @@ by VMDelegationImpl(ADetailUIState(true)) {
     }
 
     private fun getAnime(id: Int) {
-        useCase.getOtherInformation(id).onEach {
+        useCase.getOtherInformation(id).flowOn(dispatcherIO).onEach {
             when (it) {
                 is Resource.Success -> {
                     setState(
@@ -118,7 +121,7 @@ by VMDelegationImpl(ADetailUIState(true)) {
     }
 
     private fun getAnimeCharacter(id: Int) {
-        useCase.getCharactersAnimeDetail(id).onEach {
+        useCase.getCharactersAnimeDetail(id).flowOn(dispatcherIO).onEach {
             when (it) {
                 is Resource.Success -> {
                     setState(getCurrentState().copy(character = it.data))
@@ -132,7 +135,7 @@ by VMDelegationImpl(ADetailUIState(true)) {
     }
 
     private fun getCharacter(id: Int) {
-        useCase.getCharacter.invoke(id).onEach {
+        useCase.getCharacter.invoke(id).flowOn(dispatcherIO).onEach {
             when (it) {
                 is Resource.Success -> {
                     setEffect(ADetailUIEffect.ActionCharacterDetail(it.data))

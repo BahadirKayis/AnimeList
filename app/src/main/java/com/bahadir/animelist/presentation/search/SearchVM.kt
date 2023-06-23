@@ -8,12 +8,15 @@ import com.bahadir.animelist.delegation.viewmodel.VMDelegation
 import com.bahadir.animelist.delegation.viewmodel.VMDelegationImpl
 import com.bahadir.animelist.domain.usecase.SearchUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class SearchVM @Inject constructor(
     private val searchUseCase: SearchUseCase,
+    private val dispatcherIO: CoroutineDispatcher,
 ) : ViewModel(), VMDelegation<SearchUIEffect, SearchUIEvent, SearchUIState>
 by VMDelegationImpl(SearchUIState(true)) {
 
@@ -45,7 +48,7 @@ by VMDelegationImpl(SearchUIState(true)) {
     //şimdi type ve status için 1 tane seçilebiliyor, türü de belirtmen gerekiyor.
     // O yüzden sadece query var, eski hali Github geçmişinden bulabilirsiniz.
     fun search(searchText: String) = viewModelScope.launch {
-        searchUseCase.invoke(searchText).cachedIn(viewModelScope).collect {
+        searchUseCase.invoke(searchText).flowOn(dispatcherIO).cachedIn(viewModelScope).collect {
             setState(SearchUIState(anime = it, isLoading = false))
         }
     }

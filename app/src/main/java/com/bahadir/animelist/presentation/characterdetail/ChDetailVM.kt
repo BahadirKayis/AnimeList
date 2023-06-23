@@ -12,13 +12,17 @@ import com.bahadir.animelist.domain.model.CharacterAbout
 import com.bahadir.animelist.domain.model.home.CharactersUI
 import com.bahadir.animelist.domain.usecase.character.CharacterPhotoUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 @HiltViewModel
 class ChDetailVM @Inject constructor(
-    savedStateHandle: SavedStateHandle, private val characterInfo: CharacterPhotoUseCase
+    savedStateHandle: SavedStateHandle,
+    private val characterInfo: CharacterPhotoUseCase,
+    private val dispatcherIO: CoroutineDispatcher
 ) : ViewModel(), VMDelegation<ChDetailUIEffect, ChDetailUIEvent, ChDetailUIState>
 by VMDelegationImpl(ChDetailUIState(isLoading = true)) {
     init {
@@ -44,7 +48,7 @@ by VMDelegationImpl(ChDetailUIState(isLoading = true)) {
     }
 
     private fun getCharacterInfo(character: CharactersUI) {
-        characterInfo.invoke(character.id).onEach {
+        characterInfo.invoke(character.id).flowOn(dispatcherIO).onEach {
             when (it) {
                 is Resource.Success -> {
                     setState(

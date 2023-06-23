@@ -8,13 +8,16 @@ import com.bahadir.animelist.delegation.viewmodel.VMDelegation
 import com.bahadir.animelist.delegation.viewmodel.VMDelegationImpl
 import com.bahadir.animelist.domain.usecase.GetScheduleAnimeUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class ScheduleVM @Inject constructor(
-    private val scheduleAnimeUseCase: GetScheduleAnimeUseCase
+    private val scheduleAnimeUseCase: GetScheduleAnimeUseCase,
+    private val dispatcherIO: CoroutineDispatcher,
 ) :
     ViewModel(), VMDelegation<ScheduleUIEffect, ScheduleUIEvent, ScheduleUIState>
 by VMDelegationImpl(ScheduleUIState(true)) {
@@ -36,9 +39,10 @@ by VMDelegationImpl(ScheduleUIState(true)) {
 
     //API de burasıda değiştirilimiş gün farketmkesizin aynı verileri gönderiyor.
     private fun getScheduleAnime(day: String) = viewModelScope.launch {
-        scheduleAnimeUseCase(day).cachedIn(viewModelScope).collectLatest { result ->
-            setState(ScheduleUIState(isLoading = false, anime = result))
-        }
+        scheduleAnimeUseCase(day).flowOn(dispatcherIO).cachedIn(viewModelScope)
+            .collectLatest { result ->
+                setState(ScheduleUIState(isLoading = false, anime = result))
+            }
     }
 
 }

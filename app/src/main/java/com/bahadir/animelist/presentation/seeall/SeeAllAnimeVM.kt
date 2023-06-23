@@ -10,13 +10,16 @@ import com.bahadir.animelist.delegation.viewmodel.VMDelegation
 import com.bahadir.animelist.delegation.viewmodel.VMDelegationImpl
 import com.bahadir.animelist.domain.usecase.seeall.SeeAllUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class SeeAllAnimeVM @Inject constructor(
     savedStateHandle: SavedStateHandle,
+    private val dispatcherIO: CoroutineDispatcher,
     private val useCase: SeeAllUseCase,
 ) : ViewModel(),
     VMDelegation<SeeAllAnimeUIEffect, SeeAllAnimeUIEvent, SeeAllAnimeUIState> by VMDelegationImpl(
@@ -54,19 +57,20 @@ class SeeAllAnimeVM @Inject constructor(
     }
 
     private fun topAnime() = viewModelScope.launch {
-        useCase.getTopHitsAnime.invoke().cachedIn(viewModelScope).collectLatest {
-            setState(SeeAllAnimeUIState(isLoading = false, topAnime = it))
-        }
+        useCase.getTopHitsAnime.invoke().flowOn(dispatcherIO).cachedIn(viewModelScope)
+            .collectLatest {
+                setState(SeeAllAnimeUIState(isLoading = false, topAnime = it))
+            }
     }
 
     private fun seasonNow() = viewModelScope.launch {
-        useCase.getSeasonNow.invoke().cachedIn(viewModelScope).collect {
+        useCase.getSeasonNow.invoke().flowOn(dispatcherIO).cachedIn(viewModelScope).collect {
             setState(SeeAllAnimeUIState(isLoading = false, seasonNow = it))
         }
     }
 
     private fun recommendation() = viewModelScope.launch {
-        useCase.getRecommendation.invoke().cachedIn(viewModelScope).collect {
+        useCase.getRecommendation.invoke().flowOn(dispatcherIO).cachedIn(viewModelScope).collect {
             setState(SeeAllAnimeUIState(false, recommendation = it))
         }
     }
