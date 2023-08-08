@@ -40,7 +40,9 @@ An android application that uses <a href="https://docs.api.jikan.moe">Jikan API<
 - [OkHttp](https://square.github.io/okhttp/): An HTTP client that efficiently make network requests.
 - [Paging3](https://developer.android.com/topic/libraries/architecture/paging/v3-migration): Used to optimize data flow by breaking down large data sets into smaller pieces and loading them only when needed.
 - [Custom Compound View](https://www.youtube.com/watch?v=UmjiAIsIDw0&ab_channel=EmreHamurcu): Is a reusable user interface component that combines multiple existing views or components into a single cohesive unit, simplifying usage and management.
-
+- [Firebase Authentication](https://firebase.google.com/docs/auth?hl=tr): is a free service that helps you authenticate users and sign them in to your app.
+- [Youtube Player](https://github.com/PierfrancescoSoffritti/android-youtube-player)
+  
 ## Architecture
 This app uses [***MVVM (Model View View-Model)***](https://developer.android.com/jetpack/docs/guide#recommended-app-arch) architecture
 
