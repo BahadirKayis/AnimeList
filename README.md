@@ -49,7 +49,9 @@ This app uses [***MVVM (Model View View-Model)***](https://developer.android.com
 ![](https://user-images.githubusercontent.com/21035435/69536839-9f4c8e80-0fa0-11ea-85ee-d7823e5a46b0.png)
 
 ## Video
-https://github.com/BahadirKayis/AnimeList/assets/66027016/d190d227-8d73-4a3a-86b6-d49fc40417ea
+https://github.com/BahadirKayis/AnimeList/assets/66027016/d7a9ae13-4a40-4756-a22a-c450a04deef3
+
+
 
 
 
