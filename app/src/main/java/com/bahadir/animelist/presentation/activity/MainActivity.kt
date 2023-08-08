@@ -13,7 +13,6 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.airbnb.lottie.LottieAnimationView
 import com.bahadir.animelist.R
 import com.bahadir.animelist.common.extensions.collectIn
 import com.bahadir.animelist.common.extensions.gone
@@ -88,20 +87,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onWindowFocusChanged(hasFocus: Boolean) {
-        super.onWindowFocusChanged(hasFocus)
-        window.navigationHide()
-    }
-
     private fun splashScreen(splashScreen: SplashScreen) {
-        // gecikmeyi hesaplamak istersek api 26 ve üstü istediği için açıyoruz ama gecikmeyi
-        // 0 da versem 10-20 de versam bir fark olmuyor
         splashScreen.setOnExitAnimationListener { vp ->
-            val lottieView = findViewById<LottieAnimationView>(R.id.lottieView)
+            val lottieView = binding.lottieView
             lottieView.enableMergePathsForKitKatAndAbove(true)
-
-            // We compute the delay to wait for the end of the splash screen icon
-            // animation.
             val delay = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 val splashScreenAnimationEndTime =
                     Instant.ofEpochMilli(vp.iconAnimationStartMillis + vp.iconAnimationDurationMillis)
@@ -112,7 +101,6 @@ class MainActivity : AppCompatActivity() {
                 DELAY
             }
 
-            //Gecikmeden sonra başlatılır
             lottieView.postDelayed({
                 vp.view.alpha = 0f
                 vp.iconView.alpha = 0f
@@ -128,7 +116,6 @@ class MainActivity : AppCompatActivity() {
                         contentView.height / 2,
                         0f,
                         max(contentView.width, contentView.height).toFloat()
-
                     ).setDuration(DURATION)
                     lottieView.gone()
                     animator.start()
@@ -141,6 +128,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        window.navigationHide()
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
         window.navigationHide()
     }
 
