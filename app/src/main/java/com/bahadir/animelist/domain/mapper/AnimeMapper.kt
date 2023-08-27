@@ -8,6 +8,7 @@ import com.bahadir.animelist.data.model.comments.CommentsData
 import com.bahadir.animelist.domain.model.AnimeDetailUI
 import com.bahadir.animelist.domain.model.detail.CommentsUI
 import com.bahadir.animelist.domain.model.home.AnimeUI
+import com.bahadir.animelist.data.model.character.Anime
 
 fun List<com.bahadir.animelist.data.model.anime.AnimeData>.animeUI() = map {
     AnimeUI(
@@ -22,7 +23,7 @@ fun List<com.bahadir.animelist.data.model.anime.AnimeData>.animeUI() = map {
     )
 }
 
-fun com.bahadir.animelist.data.model.character.Anime.characterAnimeUI() = run {
+fun Anime.characterAnimeUI() = run {
     AnimeUI(
         id = malId,
         url = url,
