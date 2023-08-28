@@ -2,10 +2,12 @@ package com.bahadir.animelist.presentation.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.bahadir.animelist.common.DataObserve
 import com.bahadir.animelist.common.Resource
 import com.bahadir.animelist.common.extensions.collectIn
 import com.bahadir.animelist.delegation.viewmodel.VMDelegation
 import com.bahadir.animelist.delegation.viewmodel.VMDelegationImpl
+import com.bahadir.animelist.domain.network.NetworkObserver
 import com.bahadir.animelist.domain.usecase.home.CharacterAnimeSeasonUseCase
 import com.bahadir.animelist.domain.usecase.home.EpisodeRandomRecommendationUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,14 +17,26 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
+import javax.inject.Named
 
 @HiltViewModel
 class HomeVM @Inject constructor(
     private val getCharacterAnimSeason: CharacterAnimeSeasonUseCase,
     private val dispatcherIO: CoroutineDispatcher,
-    private val getSecondData: EpisodeRandomRecommendationUseCase
+    private val getSecondData: EpisodeRandomRecommendationUseCase,
+    networkObserver: NetworkObserver,
+    @Named(value = "Unconfined") private val dispatcherUnconfined: CoroutineDispatcher
 ) : ViewModel(),
-    VMDelegation<HomeUIEffect, HomeUIEvent, HomeUIState> by VMDelegationImpl(HomeUIState(true)) {
+    VMDelegation<HomeUIEffect, HomeUIEvent, HomeUIState> by VMDelegationImpl(HomeUIState(isLoading = true)) {
+    private val dataObserve = DataObserve(
+        executeProcess = {
+            getFirstData()
+        },
+        executeProgress = {
+            setState(state = HomeUIState(isLoading = true))
+        }
+    )
+
     init {
         viewModel(this)
         event.collectIn(viewModelScope) { event ->
@@ -40,12 +54,13 @@ class HomeVM @Inject constructor(
                 is HomeUIEvent.NewEpisode -> setEffect(HomeUIEffect.SnackBarMessage(event.message))
             }
         }
-        getData()
+
+        networkObserver.observe().flowOn(context = dispatcherUnconfined).collectIn(coroutineScope = viewModelScope, function = dataObserve::observeData)
     }
 
     //flowOn(dispatcherIO) IO işlemlerini ayrı bir thread üzerinde çalıştırırken,
     //launchIn(viewModelScope) ise Flow'u ViewModel'in kapsamında yönetir
-    private fun getData() {
+    private fun getFirstData() {
         getCharacterAnimSeason.invoke().flowOn(dispatcherIO).onEach { result ->
             when (result) {
                 is Resource.Success -> {

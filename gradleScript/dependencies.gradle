@@ -1,0 +1,134 @@
+/***
+ *
+ * This file created for dependency versions.
+ * In this way, more cleaner and readable structure was built.
+ *
+ * If you need to update dependencies, you have to go to File -> Project Structure... -> Dependencies -> All Modules / app
+ *
+ * */
+
+ext {
+
+    // AppConfig Dependencies...
+    COMPILE_SDK = 34
+    MIN_SDK = 21
+    TARGET_SDK = 34
+    VERSION_CODE = 1
+    VERSION_NAME = "1.0"
+
+    AppConfig = [
+            compile_sdk : COMPILE_SDK,
+            min_sdk     : MIN_SDK,
+            target_sdk  : TARGET_SDK,
+            version_code: VERSION_CODE,
+            version_name: VERSION_NAME,
+    ]
+
+    // External Library Dependencies...
+    GLIDE_VER = "4.15.1"
+    GLIDE_CMP_VER = "4.14.2"
+    GLIDE_OKHTTP_VER = "4.14.2"
+    RETRO_VER = "2.9.0"
+    LOTTIE_VER = "6.0.0"
+    CIRCLE_IND_VER = "2.1.6"
+    SLIDER_VER = "1.0"
+    SHIMMER_VER = "0.5.0"
+    SPINNER_VER = "1.2.5"
+    EXP_TV_VER = "1.0.3"
+    YT_PLA_VER = "11.1.0"
+    GLIDE_VER  = "4.15.1"
+    GLIDE_COMP_VER = "4.14.2"
+    GLIDE_INTG_VER = "4.14.2"
+
+    ExtLibraries = [
+            glide_ver       : GLIDE_VER,
+            glide_cmp_ver   : GLIDE_CMP_VER,
+            glide_okhttp_ver: GLIDE_OKHTTP_VER,
+            retro_ver       : RETRO_VER,
+            lottie_ver      : LOTTIE_VER,
+            circle_ind_ver  : CIRCLE_IND_VER,
+            slider_ver      : SLIDER_VER,
+            shimmer_ver     : SHIMMER_VER,
+            spinner_ver     : SPINNER_VER,
+            exp_tv_ver      : EXP_TV_VER,
+            yt_pla_ver      : YT_PLA_VER,
+            glide_ver: GLIDE_VER,
+            glide_comp_ver : GLIDE_COMP_VER,
+            glide_intg_ver: GLIDE_INTG_VER
+    ]
+
+    // Google Firebase Library Dependencies...
+    BOM_VER = "31.1.1"
+    PSER_AUTH_VER = "20.6.0"
+    AUTH_KTX_VER = "22.1.1"
+    STORAGE_KTX_VER = "20.2.1"
+    CRASHLYTICS_KTX_VER = "18.4.1"
+    ANALYTICS_KTX_VER = "21.3.0"
+    PERF_KTX_VER = "20.4.1"
+
+    FirebaseLibraries = [
+            bom_ver        : BOM_VER,
+            pser_auth_ver  : PSER_AUTH_VER,
+            auth_ver       : AUTH_KTX_VER,
+            storage_ver    : STORAGE_KTX_VER,
+            crashlytics_ver: CRASHLYTICS_KTX_VER,
+            analytics_ver  : ANALYTICS_KTX_VER,
+            perf_ver       : PERF_KTX_VER,
+    ]
+
+    // Google Hilt Library Dependencies...
+    HILT_VER = "2.46.1"
+    HILT_COMP_VER = "1.0.0"
+    DAGGER_VER = "2.44"
+
+    HiltLibrary = [
+            hilt: HILT_VER,
+            hilt_comp: HILT_COMP_VER,
+            dagger: DAGGER_VER
+    ]
+
+    // Android Library Dependencies...
+    VMODEL_VER = "2.6.1"
+    ANDRO_KTX_VER = "1.10.1"
+    ACT_KTX_VER = "1.7.2"
+    COROUTINES_VER = "1.7.1"
+    NAV_VER = "2.7.1"
+    SPLASH_SCREEN_VER = "1.0.1"
+    PAGING_VER = "3.2.0"
+    APPCOMPAT_VER = "1.6.1"
+    MATERIAL_VER = "1.9.0"
+    CONS_LAYOUT_VER = "2.1.4"
+    SWIPE_REF_VER = "1.1.0"
+
+    AndroLibraries = [
+            vmodel_ver       : VMODEL_VER,
+            and_ktx_ver      : ANDRO_KTX_VER,
+            act_ktx_ver      : ACT_KTX_VER,
+            coroutines_ver   : COROUTINES_VER,
+            nav_ver          : NAV_VER,
+            splash_screen_ver: SPLASH_SCREEN_VER,
+            paging_ver       : PAGING_VER,
+            appcompat_ver    : APPCOMPAT_VER,
+            material_ver     : MATERIAL_VER,
+            cons_layout_ver  : CONS_LAYOUT_VER,
+            swipe_ref_ver   : SWIPE_REF_VER
+    ]
+
+    // Test Library Dependencies...
+    JUNIT_VER = "4.13.2"
+
+    TestLibraries = [
+            junit_ver: JUNIT_VER
+    ]
+
+    // Android Test Library Dependencies...
+    ANDRO_JUNIT_VER = "1.1.5"
+    ANDRO_ESP_VER = "3.5.1"
+
+    AndroTestLibraries = [
+            andro_junit_ver: ANDRO_JUNIT_VER,
+            andro_esp_ver  : ANDRO_ESP_VER
+    ]
+
+
+}
